@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package note;
+
+service NoteService {
+    // Creates a new note
+    rpc CreateNote (CreateNoteRequest) returns (NoteResponse);
+    
+    // Retrieves a note by ID
+    rpc GetNote (GetNoteRequest) returns (NoteResponse);
+    rpc GetAllNotes (empty) returns (AllNotesResponse);
+
+    // Updates a note
+    rpc UpdateNote (UpdateNoteRequest) returns (NoteResponse);
+    
+    // Deletes a note
+    rpc DeleteNote (DeleteNoteRequest) returns (DeleteNoteResponse);
+
+    rpc 
+}
+
+message empty{
+
+}
+
+message Note {
+    int32 id_note = 1;
+    string str_text = 2;
+    string str_md_text = 3;
+    string str_date = 4;
+    bool bool_completed = 5;
+}
+
+message CreateNoteRequest {
+    string str_text = 1;
+    string str_md_text = 2;
+    string str_date = 3;
+    bool bool_completed = 4;
+}
+
+message GetNoteRequest {
+    int32 id_note = 1;
+}
+
+message UpdateNoteRequest {
+    int32 id_note = 1;
+    string str_text = 2;
+    string str_md_text = 3;
+    string str_date = 4;
+    bool bool_completed = 5;
+}
+
+message DeleteNoteRequest {
+    int32 id_note = 1;
+}
+
+message NoteResponse {
+    Note note = 1;
+}
+
+message DeleteNoteResponse {
+    bool success = 1;
+}
+
+message AllNotesResponse{
+    repeated Note note = 1;
+}
