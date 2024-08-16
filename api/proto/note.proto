@@ -12,7 +12,7 @@ service NoteService {
     rpc GetAllNotes (empty) returns (AllNotesResponse);
 
     // Updates a note
-    rpc UpdateNote (UpdateNoteRequest) returns (NoteResponse);
+    rpc UpdateNote (UpdateNoteRequest) returns (IdResponse);
     
     // Deletes a note
     rpc DeleteNote (DeleteNoteRequest) returns (DeleteNoteResponse);

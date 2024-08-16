@@ -57,7 +57,7 @@ class NoteServiceStub(object):
         self.UpdateNote = channel.unary_unary(
                 '/note.NoteService/UpdateNote',
                 request_serializer=note__pb2.UpdateNoteRequest.SerializeToString,
-                response_deserializer=note__pb2.NoteResponse.FromString,
+                response_deserializer=note__pb2.IdResponse.FromString,
                 _registered_method=True)
         self.DeleteNote = channel.unary_unary(
                 '/note.NoteService/DeleteNote',
@@ -84,7 +84,8 @@ class NoteServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetAllNotes(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Retrieves all notes
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -124,7 +125,7 @@ def add_NoteServiceServicer_to_server(servicer, server):
             'UpdateNote': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateNote,
                     request_deserializer=note__pb2.UpdateNoteRequest.FromString,
-                    response_serializer=note__pb2.NoteResponse.SerializeToString,
+                    response_serializer=note__pb2.IdResponse.SerializeToString,
             ),
             'DeleteNote': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteNote,
@@ -239,7 +240,7 @@ class NoteService(object):
             target,
             '/note.NoteService/UpdateNote',
             note__pb2.UpdateNoteRequest.SerializeToString,
-            note__pb2.NoteResponse.FromString,
+            note__pb2.IdResponse.FromString,
             options,
             channel_credentials,
             insecure,
