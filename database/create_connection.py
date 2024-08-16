@@ -1,10 +1,11 @@
 from sqlalchemy import create_engine
+from modules.conf.get import *
 
 
 def __init_conn():
     """Create connection"""
     engine = create_engine(
-        "postgresql+pg8000://postgres:postgres@host/danalize")
+        f"postgresql+pg8000://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}")
     return engine
 
 
