@@ -16,7 +16,6 @@ service NoteService {
     // Deletes a note
     rpc DeleteNote (DeleteNoteRequest) returns (DeleteNoteResponse);
 
-    rpc 
 }
 
 message empty{
