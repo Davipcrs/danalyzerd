@@ -4,10 +4,11 @@ package note;
 
 service NoteService {
     // Creates a new note
-    rpc CreateNote (CreateNoteRequest) returns (NoteResponse);
+    rpc CreateNote (CreateNoteRequest) returns (IdResponse);
     
     // Retrieves a note by ID
     rpc GetNote (GetNoteRequest) returns (NoteResponse);
+    // Retrieves all notes
     rpc GetAllNotes (empty) returns (AllNotesResponse);
 
     // Updates a note
@@ -63,4 +64,8 @@ message DeleteNoteResponse {
 
 message AllNotesResponse{
     repeated Note note = 1;
+}
+
+message IdResponse{
+    int32 id = 1;
 }
