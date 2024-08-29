@@ -15,4 +15,5 @@ def _load_config_file(file_path):
     return config_data
 
 
-cfg = _load_config_file(r"/etc/danalyzer/db_defines.conf")
+cfg = _load_config_file(r"/etc/danalyzer/defines.conf")
+db_cfg = _load_config_file(r"/etc/danalyzer/db_defines.conf")
