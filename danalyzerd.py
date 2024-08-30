@@ -1,7 +1,8 @@
+import modules.conf.create_conf
+import os
 import grpc
 from api.proto import note_pb2_grpc
 from api.api import NoteServices
-import grpc
 from concurrent import futures
 
 
@@ -11,6 +12,7 @@ def serve():
         NoteServices(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
+    server.wait_for_termination()
 
 
 if __name__ == '__main__':

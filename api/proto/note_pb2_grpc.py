@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-import note_pb2 as note__pb2
+import api.proto.note_pb2 as note__pb2
 
 GRPC_GENERATED_VERSION = '1.65.4'
 GRPC_VERSION = grpc.__version__
@@ -13,7 +13,8 @@ _version_not_supported = False
 
 try:
     from grpc._utilities import first_version_is_lower
-    _version_not_supported = first_version_is_lower(GRPC_VERSION, GRPC_GENERATED_VERSION)
+    _version_not_supported = first_version_is_lower(
+        GRPC_VERSION, GRPC_GENERATED_VERSION)
 except ImportError:
     _version_not_supported = True
 
@@ -40,30 +41,30 @@ class NoteServiceStub(object):
             channel: A grpc.Channel.
         """
         self.CreateNote = channel.unary_unary(
-                '/note.NoteService/CreateNote',
-                request_serializer=note__pb2.CreateNoteRequest.SerializeToString,
-                response_deserializer=note__pb2.IdResponse.FromString,
-                _registered_method=True)
+            '/note.NoteService/CreateNote',
+            request_serializer=note__pb2.CreateNoteRequest.SerializeToString,
+            response_deserializer=note__pb2.IdResponse.FromString,
+            _registered_method=True)
         self.GetNote = channel.unary_unary(
-                '/note.NoteService/GetNote',
-                request_serializer=note__pb2.GetNoteRequest.SerializeToString,
-                response_deserializer=note__pb2.NoteResponse.FromString,
-                _registered_method=True)
+            '/note.NoteService/GetNote',
+            request_serializer=note__pb2.GetNoteRequest.SerializeToString,
+            response_deserializer=note__pb2.NoteResponse.FromString,
+            _registered_method=True)
         self.GetAllNotes = channel.unary_unary(
-                '/note.NoteService/GetAllNotes',
-                request_serializer=note__pb2.empty.SerializeToString,
-                response_deserializer=note__pb2.AllNotesResponse.FromString,
-                _registered_method=True)
+            '/note.NoteService/GetAllNotes',
+            request_serializer=note__pb2.empty.SerializeToString,
+            response_deserializer=note__pb2.AllNotesResponse.FromString,
+            _registered_method=True)
         self.UpdateNote = channel.unary_unary(
-                '/note.NoteService/UpdateNote',
-                request_serializer=note__pb2.UpdateNoteRequest.SerializeToString,
-                response_deserializer=note__pb2.IdResponse.FromString,
-                _registered_method=True)
+            '/note.NoteService/UpdateNote',
+            request_serializer=note__pb2.UpdateNoteRequest.SerializeToString,
+            response_deserializer=note__pb2.IdResponse.FromString,
+            _registered_method=True)
         self.DeleteNote = channel.unary_unary(
-                '/note.NoteService/DeleteNote',
-                request_serializer=note__pb2.DeleteNoteRequest.SerializeToString,
-                response_deserializer=note__pb2.DeleteNoteResponse.FromString,
-                _registered_method=True)
+            '/note.NoteService/DeleteNote',
+            request_serializer=note__pb2.DeleteNoteRequest.SerializeToString,
+            response_deserializer=note__pb2.DeleteNoteResponse.FromString,
+            _registered_method=True)
 
 
 class NoteServiceServicer(object):
@@ -107,53 +108,55 @@ class NoteServiceServicer(object):
 
 def add_NoteServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'CreateNote': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateNote,
-                    request_deserializer=note__pb2.CreateNoteRequest.FromString,
-                    response_serializer=note__pb2.IdResponse.SerializeToString,
-            ),
-            'GetNote': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetNote,
-                    request_deserializer=note__pb2.GetNoteRequest.FromString,
-                    response_serializer=note__pb2.NoteResponse.SerializeToString,
-            ),
-            'GetAllNotes': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAllNotes,
-                    request_deserializer=note__pb2.empty.FromString,
-                    response_serializer=note__pb2.AllNotesResponse.SerializeToString,
-            ),
-            'UpdateNote': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateNote,
-                    request_deserializer=note__pb2.UpdateNoteRequest.FromString,
-                    response_serializer=note__pb2.IdResponse.SerializeToString,
-            ),
-            'DeleteNote': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteNote,
-                    request_deserializer=note__pb2.DeleteNoteRequest.FromString,
-                    response_serializer=note__pb2.DeleteNoteResponse.SerializeToString,
-            ),
+        'CreateNote': grpc.unary_unary_rpc_method_handler(
+            servicer.CreateNote,
+            request_deserializer=note__pb2.CreateNoteRequest.FromString,
+            response_serializer=note__pb2.IdResponse.SerializeToString,
+        ),
+        'GetNote': grpc.unary_unary_rpc_method_handler(
+            servicer.GetNote,
+            request_deserializer=note__pb2.GetNoteRequest.FromString,
+            response_serializer=note__pb2.NoteResponse.SerializeToString,
+        ),
+        'GetAllNotes': grpc.unary_unary_rpc_method_handler(
+            servicer.GetAllNotes,
+            request_deserializer=note__pb2.empty.FromString,
+            response_serializer=note__pb2.AllNotesResponse.SerializeToString,
+        ),
+        'UpdateNote': grpc.unary_unary_rpc_method_handler(
+            servicer.UpdateNote,
+            request_deserializer=note__pb2.UpdateNoteRequest.FromString,
+            response_serializer=note__pb2.IdResponse.SerializeToString,
+        ),
+        'DeleteNote': grpc.unary_unary_rpc_method_handler(
+            servicer.DeleteNote,
+            request_deserializer=note__pb2.DeleteNoteRequest.FromString,
+            response_serializer=note__pb2.DeleteNoteResponse.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'note.NoteService', rpc_method_handlers)
+        'note.NoteService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('note.NoteService', rpc_method_handlers)
-
+    server.add_registered_method_handlers(
+        'note.NoteService', rpc_method_handlers)
 
  # This class is part of an EXPERIMENTAL API.
+
+
 class NoteService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
     def CreateNote(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                   target,
+                   options=(),
+                   channel_credentials=None,
+                   call_credentials=None,
+                   insecure=False,
+                   compression=None,
+                   wait_for_ready=None,
+                   timeout=None,
+                   metadata=None):
         return grpc.experimental.unary_unary(
             request,
             target,
@@ -172,15 +175,15 @@ class NoteService(object):
 
     @staticmethod
     def GetNote(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                target,
+                options=(),
+                channel_credentials=None,
+                call_credentials=None,
+                insecure=False,
+                compression=None,
+                wait_for_ready=None,
+                timeout=None,
+                metadata=None):
         return grpc.experimental.unary_unary(
             request,
             target,
@@ -199,15 +202,15 @@ class NoteService(object):
 
     @staticmethod
     def GetAllNotes(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                    target,
+                    options=(),
+                    channel_credentials=None,
+                    call_credentials=None,
+                    insecure=False,
+                    compression=None,
+                    wait_for_ready=None,
+                    timeout=None,
+                    metadata=None):
         return grpc.experimental.unary_unary(
             request,
             target,
@@ -226,15 +229,15 @@ class NoteService(object):
 
     @staticmethod
     def UpdateNote(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                   target,
+                   options=(),
+                   channel_credentials=None,
+                   call_credentials=None,
+                   insecure=False,
+                   compression=None,
+                   wait_for_ready=None,
+                   timeout=None,
+                   metadata=None):
         return grpc.experimental.unary_unary(
             request,
             target,
@@ -253,15 +256,15 @@ class NoteService(object):
 
     @staticmethod
     def DeleteNote(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                   target,
+                   options=(),
+                   channel_credentials=None,
+                   call_credentials=None,
+                   insecure=False,
+                   compression=None,
+                   wait_for_ready=None,
+                   timeout=None,
+                   metadata=None):
         return grpc.experimental.unary_unary(
             request,
             target,

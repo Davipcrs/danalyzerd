@@ -1,9 +1,9 @@
-from modules.conf.load_conf import db_cfg, cfg
+from modules.conf.load_conf import db_cfg  # , cfg
 
 
-USER = db_cfg["Database"]["user"]
-PASSWORD = db_cfg["Database"]["password"]
-HOST = db_cfg["Database"]["host"]
-PORT = db_cfg["Database"]["port"]
-DATABASE = db_cfg["Database"]["database"]
-AES_FILE = cfg["Paths"]["database_aes"]
+USER = db_cfg["database"]["user"]
+PASSWORD = db_cfg["database"]["password"]
+HOST = db_cfg["database"]["host"]
+PORT = db_cfg["database"]["port"]
+DATABASE = db_cfg["database"]["database"]
+# AES_FILE = cfg["Paths"]["database_aes"]

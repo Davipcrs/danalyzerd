@@ -2,9 +2,14 @@
 
 A Day-Analyzer / Controller Service Deamon  
 
+## Server
+
+This server is Ready to use, but needs some quality of life improvements (See the Priority (Implementation))
+
 ## Priority (Implementation)
 
 - Error Handling
 - Conf File (Database) - OK
-- Encryption
+- Encryption Conf File
+- gRPC SSL
 - danalyzerc (CLI for the app)
