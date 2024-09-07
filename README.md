@@ -12,4 +12,6 @@ This server is Ready to use, but needs some quality of life improvements (See th
 - Conf File (Database) - OK
 - Encryption Conf File
 - gRPC SSL
+- Comments
+- Logs
 - danalyzerc (CLI for the app)

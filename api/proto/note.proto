@@ -1,13 +1,14 @@
 syntax = "proto3";
 
 package note;
-
+// protoc --proto_path=lib/api/proto --dart_out=grpc:./lib/api/generated  ./lib/api/proto/note.proto
 service NoteService {
     // Creates a new note
     rpc CreateNote (CreateNoteRequest) returns (IdResponse);
     
     // Retrieves a note by ID
     rpc GetNote (GetNoteRequest) returns (NoteResponse);
+    
     // Retrieves all notes
     rpc GetAllNotes (empty) returns (AllNotesResponse);
 
@@ -17,10 +18,18 @@ service NoteService {
     // Deletes a note
     rpc DeleteNote (DeleteNoteRequest) returns (DeleteNoteResponse);
 
+    // Updates Boolean Status: It is needed because of the switch button
+    rpc UpdateBool (UpdateBoolRequest) returns (empty);
+
 }
 
 message empty{
 
+}
+
+message UpdateBoolRequest { 
+    int32 id_note = 1;
+    bool bool_complete = 2;
 }
 
 message Note {
