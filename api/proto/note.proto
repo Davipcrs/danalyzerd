@@ -12,6 +12,9 @@ service NoteService {
     // Retrieves all notes
     rpc GetAllNotes (empty) returns (AllNotesResponse);
 
+    // Get Notes by day
+    rpc GetNoteByDay (DayRequest) returns (AllNotesResponse);
+
     // Updates a note
     rpc UpdateNote (UpdateNoteRequest) returns (IdResponse);
     
@@ -77,4 +80,8 @@ message AllNotesResponse{
 
 message IdResponse{
     int32 id = 1;
+}
+
+message DayRequest{
+    string day = 1;
 }

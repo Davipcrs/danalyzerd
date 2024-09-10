@@ -19,3 +19,13 @@ def select_one_note(id_note: int):
         result = conn.execute(statement=stm)
 
     return result.all()[0]
+
+
+def select_notes_by_day(day: str):
+
+    stm = select(Note).where(Note.str_day == day)
+
+    with ENGINE.connect() as conn:
+        result = conn.execute(statement=stm)
+
+    return result.all()[0]

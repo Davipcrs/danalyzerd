@@ -36,6 +36,12 @@ class NoteServices(note_pb2_grpc.NoteServiceServicer):
             message.note.append(aux)
         return message
 
+    def GetNoteByDay(self, request, context):
+        return super().GetNoteByDay(request, context)
+
+    def UpdateBool(self, request, context):
+        return super().UpdateBool(request, context)
+
     def UpdateNote(self, request, context):
         """Updates a note
         """

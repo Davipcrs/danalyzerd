@@ -9,6 +9,14 @@ class empty(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
+class UpdateBoolRequest(_message.Message):
+    __slots__ = ("id_note", "bool_complete")
+    ID_NOTE_FIELD_NUMBER: _ClassVar[int]
+    BOOL_COMPLETE_FIELD_NUMBER: _ClassVar[int]
+    id_note: int
+    bool_complete: bool
+    def __init__(self, id_note: _Optional[int] = ..., bool_complete: bool = ...) -> None: ...
+
 class Note(_message.Message):
     __slots__ = ("id_note", "str_text", "str_md_text", "str_date", "bool_completed")
     ID_NOTE_FIELD_NUMBER: _ClassVar[int]
@@ -84,3 +92,9 @@ class IdResponse(_message.Message):
     ID_FIELD_NUMBER: _ClassVar[int]
     id: int
     def __init__(self, id: _Optional[int] = ...) -> None: ...
+
+class DayRequest(_message.Message):
+    __slots__ = ("day",)
+    DAY_FIELD_NUMBER: _ClassVar[int]
+    day: str
+    def __init__(self, day: _Optional[str] = ...) -> None: ...
