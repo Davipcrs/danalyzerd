@@ -1,6 +1,14 @@
+''''''
+# Feito por Davi Coelho 28/09/2024
+#
+# Arquivo que efetua a leitura dos arquivos de configuração
+#
+''''''
+
+
+
+
 import configparser
-
-
 def _load_config_file(file_path):
     config = configparser.ConfigParser()
     config.read(file_path)

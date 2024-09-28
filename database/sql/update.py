@@ -12,3 +12,14 @@ def update_note(id_note: int, str_text: str, str_md_text: str, str_day: str, str
         conn.commit()
 
     return result.rowcount
+
+
+def update_note_bool(id_note: int, boolean: bool):
+    stm = update(Note).where(Note.id_note == id_note).values(
+        bool_completed=boolean)
+
+    with ENGINE.connect() as conn:
+        result = conn.execute(statement=stm)
+        conn.commit()
+
+    return result.rowcount

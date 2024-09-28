@@ -6,7 +6,7 @@ from database.models.note import Note
 def __init_conn():
     """Create connection"""
     engine = create_engine(
-        f"postgresql+pg8000://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}")
+        f"mysql+pymysql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}")
     Note().__table__.create(bind=engine, checkfirst=True)
     return engine
 

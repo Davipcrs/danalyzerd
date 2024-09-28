@@ -1,13 +1,22 @@
+''''''
+# Feito por Davi Coelho 28/09/2024
+#
+# Arquivo contém as funções chamadas pelo serviço de gRPC, ler os comentários de cada função
+# Para documentação.
+#
+''''''
+
+
+
+
 import grpc
 from concurrent import futures
 import time
-from database.sql.update import update_note
+from database.sql.update import update_note, update_note_bool
 from database.sql.insert import insert_into_note
 from database.sql.delete import delete_note
-from database.sql.select import select_one_note, select_all_notes
+from database.sql.select import select_one_note, select_all_notes, select_notes_by_day
 from api.proto import note_pb2_grpc, note_pb2
-
-
 class NoteServices(note_pb2_grpc.NoteServiceServicer):
     def CreateNote(self, request, context):
         """Creates a new note
@@ -20,8 +29,9 @@ class NoteServices(note_pb2_grpc.NoteServiceServicer):
         """Retrieves a note by ID
         """
         data = select_one_note(request.id_note)
+        date_auxiliar = data[3] + data[4]
         note = note_pb2.Note(id_note=data[0], str_text=data[1],
-                             str_md_text=data[2], str_date=data[3], bool_completed=data[4])
+                             str_md_text=data[2], str_date=date_auxiliar, bool_completed=data[4])
         response = note_pb2.NoteResponse(note)
         return response
 
@@ -31,22 +41,35 @@ class NoteServices(note_pb2_grpc.NoteServiceServicer):
 
         message = note_pb2.AllNotesResponse()
         for data in all_notes:
+            date_auxiliar = data[3] + data[4]
             aux = note_pb2.Note(id_note=data[0], str_text=data[1],
-                                str_md_text=data[2], str_date=data[3], bool_completed=data[4])
+                                str_md_text=data[2], str_date=date_auxiliar, bool_completed=data[4])
             message.note.append(aux)
         return message
 
     def GetNoteByDay(self, request, context):
-        return super().GetNoteByDay(request, context)
+        '''Get All Notes in One Day'''
+        day_notes = select_notes_by_day(request.day)
+
+        message = note_pb2.AllNotesResponse()
+        for data in day_notes:
+            date_auxiliar = data[3] + data[4]
+            aux = note_pb2.Note(id_note=data[0], str_text=data[1],
+                                str_md_text=data[2], str_date=date_auxiliar, bool_completed=data[4])
+            message.note.append(aux)
+        return message
 
     def UpdateBool(self, request, context):
-        return super().UpdateBool(request, context)
+        '''Updates if a note is active or no'''
+        update_note_bool(request.id_note, request.bool_complete)
+        return note_pb2.empty()
 
     def UpdateNote(self, request, context):
         """Updates a note
         """
+        auxilar_date = str(request.str_date).split(' ')
         update_note(request.id_note, request.str_text,
-                    request.str_md_text, request.str_date, request.bool_complete)
+                    request.str_md_text, auxilar_date[0], auxilar_date[1], request.bool_complete)
         return note_pb2.IdResponse(request.id_note)
 
     def DeleteNote(self, request, context):

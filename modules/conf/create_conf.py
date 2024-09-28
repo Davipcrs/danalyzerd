@@ -1,8 +1,16 @@
+''''''
+# Feito por Davi Coelho 28/09/2024
+#
+# Define e cria os arquivos de configuração do sistema
+#
+''''''
+
+
+
+
 import configparser
 import os
 import subprocess
-
-
 def _create_database_config_file(file_path: str, user, password, host, port, database):
     if not os.path.exists(file_path):
         config = configparser.ConfigParser()
@@ -28,7 +36,7 @@ def _create_defines_config_file(file_path: str, keypath: str):
         config = configparser.ConfigParser()
 
         config["paths"] = {
-            "database_aes": keypath
+            "database_aes": keypath,
         }
         with open(file_path, 'w') as configfile:
             config.write(configfile)
