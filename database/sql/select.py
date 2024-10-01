@@ -9,7 +9,7 @@ def select_all_notes():
     with ENGINE.connect() as conn:
         result = conn.execute(statement=stm)
 
-    return result.all()[0]
+    return result.all()
 
 
 def select_one_note(id_note: int):
@@ -28,4 +28,4 @@ def select_notes_by_day(day: str):
     with ENGINE.connect() as conn:
         result = conn.execute(statement=stm)
 
-    return result.all()[0]
+    return result.all()

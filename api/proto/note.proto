@@ -7,7 +7,7 @@ service NoteService {
     rpc CreateNote (CreateNoteRequest) returns (IdResponse);
     
     // Retrieves a note by ID
-    rpc GetNote (GetNoteRequest) returns (NoteResponse);
+    rpc GetNote (GetNoteRequest) returns (Note);
     
     // Retrieves all notes
     rpc GetAllNotes (empty) returns (AllNotesResponse);
@@ -32,7 +32,7 @@ message empty{
 
 message UpdateBoolRequest { 
     int32 id_note = 1;
-    bool bool_complete = 2;
+    bool bool_completed = 2;
 }
 
 message Note {

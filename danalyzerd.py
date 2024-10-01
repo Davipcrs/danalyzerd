@@ -8,12 +8,12 @@
 
 
 
+from concurrent import futures
 import modules.conf.create_conf  # This import execute some code!
 import os
 import grpc
 from api.proto import note_pb2_grpc
 from api.api import NoteServices
-from concurrent import futures
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     note_pb2_grpc.add_NoteServiceServicer_to_server(

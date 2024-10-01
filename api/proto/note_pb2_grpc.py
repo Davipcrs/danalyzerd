@@ -48,7 +48,7 @@ class NoteServiceStub(object):
         self.GetNote = channel.unary_unary(
                 '/note.NoteService/GetNote',
                 request_serializer=api_dot_proto_dot_note__pb2.GetNoteRequest.SerializeToString,
-                response_deserializer=api_dot_proto_dot_note__pb2.NoteResponse.FromString,
+                response_deserializer=api_dot_proto_dot_note__pb2.Note.FromString,
                 _registered_method=True)
         self.GetAllNotes = channel.unary_unary(
                 '/note.NoteService/GetAllNotes',
@@ -141,7 +141,7 @@ def add_NoteServiceServicer_to_server(servicer, server):
             'GetNote': grpc.unary_unary_rpc_method_handler(
                     servicer.GetNote,
                     request_deserializer=api_dot_proto_dot_note__pb2.GetNoteRequest.FromString,
-                    response_serializer=api_dot_proto_dot_note__pb2.NoteResponse.SerializeToString,
+                    response_serializer=api_dot_proto_dot_note__pb2.Note.SerializeToString,
             ),
             'GetAllNotes': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAllNotes,
@@ -223,7 +223,7 @@ class NoteService(object):
             target,
             '/note.NoteService/GetNote',
             api_dot_proto_dot_note__pb2.GetNoteRequest.SerializeToString,
-            api_dot_proto_dot_note__pb2.NoteResponse.FromString,
+            api_dot_proto_dot_note__pb2.Note.FromString,
             options,
             channel_credentials,
             insecure,

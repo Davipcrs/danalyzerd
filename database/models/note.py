@@ -6,9 +6,11 @@
 ''''''
 
 
+# from __future__ import annotations
 
 
-from __future__ import annotations
+
+
 from database.models.base import BASE
 from sqlalchemy import String, Boolean, Text
 from sqlalchemy.orm import Mapped

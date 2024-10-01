@@ -10,12 +10,12 @@ class empty(_message.Message):
     def __init__(self) -> None: ...
 
 class UpdateBoolRequest(_message.Message):
-    __slots__ = ("id_note", "bool_complete")
+    __slots__ = ("id_note", "bool_completed")
     ID_NOTE_FIELD_NUMBER: _ClassVar[int]
-    BOOL_COMPLETE_FIELD_NUMBER: _ClassVar[int]
+    BOOL_COMPLETED_FIELD_NUMBER: _ClassVar[int]
     id_note: int
-    bool_complete: bool
-    def __init__(self, id_note: _Optional[int] = ..., bool_complete: bool = ...) -> None: ...
+    bool_completed: bool
+    def __init__(self, id_note: _Optional[int] = ..., bool_completed: bool = ...) -> None: ...
 
 class Note(_message.Message):
     __slots__ = ("id_note", "str_text", "str_md_text", "str_date", "bool_completed")
