@@ -31,8 +31,8 @@ class NoteServices(note_pb2_grpc.NoteServiceServicer):
         """Retrieves a note by ID
         """
         data = select_one_note(request.id_note)
-        date_auxiliar = data[3] + ' ' + data[4]
-        date_obj = datetime.strptime(date_auxiliar, '%d/%m/%Y %H:%M')
+        date_auxiliar = data[3] + 'T' + data[4]
+        date_obj = datetime.fromisoformat(date_auxiliar)
         response = note_pb2.Note(id_note=data[0], str_text=data[1],
                                  str_md_text=data[2], str_date=date_obj.isoformat(), bool_completed=data[5])
         return response
@@ -43,8 +43,8 @@ class NoteServices(note_pb2_grpc.NoteServiceServicer):
 
         message = note_pb2.AllNotesResponse()
         for data in all_notes:
-            date_auxiliar = data[3] + ' ' + data[4]
-            date_obj = datetime.strptime(date_auxiliar, '%d/%m/%Y %H:%M')
+            date_auxiliar = data[3] + 'T' + data[4]
+            date_obj = datetime.fromisoformat(date_auxiliar)
             aux = note_pb2.Note(id_note=data[0], str_text=data[1],
                                 str_md_text=data[2], str_date=date_obj.isoformat(), bool_completed=data[5])
             message.note.append(aux)
@@ -57,8 +57,8 @@ class NoteServices(note_pb2_grpc.NoteServiceServicer):
 
         message = note_pb2.AllNotesResponse()
         for data in day_notes:
-            date_auxiliar = data[3] + ' ' + data[4]
-            date_obj = datetime.strptime(date_auxiliar, '%d/%m/%Y %H:%M')
+            date_auxiliar = data[3] + 'T' + data[4]
+            date_obj = datetime.fromisoformat(date_auxiliar)
             aux = note_pb2.Note(id_note=data[0], str_text=data[1],
                                 str_md_text=data[2], str_date=date_obj.isoformat(), bool_completed=data[5])
             message.note.append(aux)
