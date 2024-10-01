@@ -4,12 +4,16 @@ cryptography==43.0.0
 greenlet==3.0.3
 grpcio==1.65.4
 grpcio-tools==1.65.4
+Nuitka==2.4.8
+ordered-set==4.1.0
 pg8000==1.31.2
 protobuf==5.27.3
 pycparser==2.22
+PyMySQL==1.1.1
 python-dateutil==2.9.0.post0
 scramp==1.4.5
 setuptools==72.2.0
 six==1.16.0
 SQLAlchemy==2.0.32
 typing_extensions==4.12.2
+zstandard==0.23.0

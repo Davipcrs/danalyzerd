@@ -47,7 +47,9 @@ def _create_defines_config_file(file_path: str, keypath: str):
 
 
 def init_server():
-    if not os.path.exists(r"/home/davi/db_defines.conf"):
+    file_location = input('Database Conf file location: ')
+    if not os.path.exists(file_location):
+
         user = input("Database user: ")
         password = input("database password: ")
         host = input("hostname or ip: ")
@@ -55,7 +57,7 @@ def init_server():
         database = input("database name: ")
 
         _create_database_config_file(
-            r"/home/davi/db_defines.conf", user, password, host, port, database)
+            file_location, user, password, host, port, database)
 
     # if not os.path.exists(file_path):
     #    key_path = input("Insert a Full Path for the Secret Encryption key: ")
