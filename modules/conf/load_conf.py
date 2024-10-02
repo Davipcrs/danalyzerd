@@ -25,4 +25,6 @@ def _load_config_file(file_path):
 
 # cfg = _load_config_file(r"/etc/danalyzer/defines.conf")
 # db_cfg = _load_config_file(r"/etc/danalyzer/db_defines.conf")
-db_cfg = _load_config_file(r"/home/davi/db_defines.conf")
+with open('./conf.location', 'r') as file:
+    location = file.read()
+db_cfg = _load_config_file(location)

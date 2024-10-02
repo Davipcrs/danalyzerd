@@ -59,6 +59,9 @@ def init_server():
         _create_database_config_file(
             file_location, user, password, host, port, database)
 
+    with open('./conf.location', 'w') as file:
+        file.write(file_location)
+
     # if not os.path.exists(file_path):
     #    key_path = input("Insert a Full Path for the Secret Encryption key: ")
 
