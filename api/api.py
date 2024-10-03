@@ -10,7 +10,7 @@
 
 
 from concurrent import futures
-from datetime import datetime
+from datetime import datetime, date, time
 import grpc
 import time
 from database.sql.update import update_note, update_note_bool
@@ -23,7 +23,7 @@ class NoteServices(note_pb2_grpc.NoteServiceServicer):
         """Creates a new note
         """
         id = insert_into_note(request.str_text, request.str_md_text,
-                              request.str_date.split('T')[0], request.str_date.split('T')[1], request.bool_completed)
+                              date.fromisoformat(request.str_date.split('T')[0]), datetime.strptime(request.str_date.split('T')[1].split('.')[0], "%H:%M:%S").time(), request.bool_completed)
 
         return note_pb2.IdResponse(id)
 
@@ -31,7 +31,7 @@ class NoteServices(note_pb2_grpc.NoteServiceServicer):
         """Retrieves a note by ID
         """
         data = select_one_note(request.id_note)
-        date_auxiliar = data[3] + 'T' + data[4]
+        date_auxiliar = str(data[3]) + 'T' + str(data[4])
         date_obj = datetime.fromisoformat(date_auxiliar)
         response = note_pb2.Note(id_note=data[0], str_text=data[1],
                                  str_md_text=data[2], str_date=date_obj.isoformat(), bool_completed=data[5])
@@ -43,7 +43,7 @@ class NoteServices(note_pb2_grpc.NoteServiceServicer):
 
         message = note_pb2.AllNotesResponse()
         for data in all_notes:
-            date_auxiliar = data[3] + 'T' + data[4]
+            date_auxiliar = str(data[3]) + 'T' + str(data[4])
             date_obj = datetime.fromisoformat(date_auxiliar)
             aux = note_pb2.Note(id_note=data[0], str_text=data[1],
                                 str_md_text=data[2], str_date=date_obj.isoformat(), bool_completed=data[5])
@@ -57,7 +57,7 @@ class NoteServices(note_pb2_grpc.NoteServiceServicer):
 
         message = note_pb2.AllNotesResponse()
         for data in day_notes:
-            date_auxiliar = data[3] + 'T' + data[4]
+            date_auxiliar = str(data[3]) + 'T' + str(data[4])
             date_obj = datetime.fromisoformat(date_auxiliar)
             aux = note_pb2.Note(id_note=data[0], str_text=data[1],
                                 str_md_text=data[2], str_date=date_obj.isoformat(), bool_completed=data[5])
@@ -74,7 +74,7 @@ class NoteServices(note_pb2_grpc.NoteServiceServicer):
         """
         auxilar_date = str(request.str_date).split('T')
         update_note(request.id_note, request.str_text,
-                    request.str_md_text, auxilar_date[0], auxilar_date[1], request.bool_completed)
+                    request.str_md_text,  date.fromisoformat(str(request.str_date.split('T')[0])), datetime.strptime(str(request.str_date.split('T')[1].split('.')[0], "%H:%M:%S")).time(), request.bool_completed)
         return note_pb2.IdResponse(request.id_note)
 
     def DeleteNote(self, request, context):

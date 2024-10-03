@@ -12,7 +12,7 @@
 
 
 from database.models.base import BASE
-from sqlalchemy import String, Boolean, Text
+from sqlalchemy import String, Boolean, Text, Date, Time
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 class Note(BASE):
@@ -25,6 +25,6 @@ class Note(BASE):
     str_text: Mapped[str] = mapped_column(String(300))
     str_md_text: Mapped[str] = mapped_column(Text, default='')
     # str_date: Mapped[str] = mapped_column(String)
-    str_day: Mapped[str] = mapped_column(String(10))
-    str_time: Mapped[str] = mapped_column(String(15))
+    dt_day: Mapped[str] = mapped_column(Date())
+    t_time: Mapped[str] = mapped_column(Time())
     bool_completed: Mapped[bool] = mapped_column(Boolean)

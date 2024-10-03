@@ -23,7 +23,7 @@ def select_one_note(id_note: int):
 
 def select_notes_by_day(day: str):
 
-    stm = select(Note).where(Note.str_day == day)
+    stm = select(Note).where(Note.dt_day == day)
 
     with ENGINE.connect() as conn:
         result = conn.execute(statement=stm)
