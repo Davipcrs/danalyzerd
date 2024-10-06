@@ -9,9 +9,8 @@ This server is Ready to use, but needs some quality of life improvements (See th
 ## Priority (Implementation)
 
 - Conf File (Database) - OK
-- Encryption Conf File
-- gRPC SSL
 - Comments - OK
-- Error Handling
+- Implement conf creation wizard
+- Encryption Conf File
 - Logs
 - danalyzerc (CLI for the app)

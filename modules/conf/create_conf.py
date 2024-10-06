@@ -47,20 +47,22 @@ def _create_defines_config_file(file_path: str, keypath: str):
 
 
 def init_server():
-    file_location = input('Database Conf file location: ')
-    if not os.path.exists(file_location):
 
-        user = input("Database user: ")
-        password = input("database password: ")
-        host = input("hostname or ip: ")
-        port = input("database port: ")
-        database = input("database name: ")
+    if not os.path.exists('./conf.location'):
+        file_location = input('Database Conf file location: ')
+        if not os.path.exists(file_location):
 
-        _create_database_config_file(
-            file_location, user, password, host, port, database)
+            user = input("Database user: ")
+            password = input("database password: ")
+            host = input("hostname or ip: ")
+            port = input("database port: ")
+            database = input("database name: ")
 
-    with open('./conf.location', 'w') as file:
-        file.write(file_location)
+            _create_database_config_file(
+                file_location, user, password, host, port, database)
+
+        with open('./conf.location', 'w') as file:
+            file.write(file_location)
 
     # if not os.path.exists(file_path):
     #    key_path = input("Insert a Full Path for the Secret Encryption key: ")
