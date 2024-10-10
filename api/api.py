@@ -72,9 +72,8 @@ class NoteServices(note_pb2_grpc.NoteServiceServicer):
     def UpdateNote(self, request, context):
         """Updates a note
         """
-        auxilar_date = str(request.str_date).split('T')
         update_note(request.id_note, request.str_text,
-                    request.str_md_text,  date.fromisoformat(str(request.str_date.split('T')[0])), datetime.strptime(str(request.str_date.split('T')[1].split('.')[0], "%H:%M:%S")).time(), request.bool_completed)
+                    request.str_md_text,  date.fromisoformat(request.str_date.split('T')[0]), datetime.strptime(request.str_date.split('T')[1].split('.')[0], "%H:%M:%S").time(), request.bool_completed)
         return note_pb2.IdResponse(request.id_note)
 
     def DeleteNote(self, request, context):
